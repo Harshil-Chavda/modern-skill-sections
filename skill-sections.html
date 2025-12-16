@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10 Skill Sections Showcase</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- GLOBAL RESET --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: #050505; color: white; font-family: 'Segoe UI', sans-serif; overflow-x: hidden; }
+        
+        /* Navigation for Demo */
+        .demo-nav { position: fixed; top: 0; left: 0; width: 100%; background: #111; z-index: 999; padding: 10px; display: flex; overflow-x: auto; gap: 10px; border-bottom: 1px solid #333; }
+        .demo-nav a { color: #888; text-decoration: none; padding: 5px 15px; border: 1px solid #333; border-radius: 20px; white-space: nowrap; font-size: 0.9rem; transition: 0.3s; }
+        .demo-nav a:hover { background: #27c93f; color: black; border-color: #27c93f; }
+        
+        /* Section Containers */
+        section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 80px 20px; border-bottom: 1px solid #222; position: relative; }
+        h2.style-title { margin-bottom: 40px; font-size: 2rem; color: #555; text-transform: uppercase; letter-spacing: 2px; }
+        h2.style-title span { color: #27c93f; }
+
+        /* --- SKILL DATA ICONS (Common) --- */
+        .fa-php { color: #777BB4; }
+        .fa-js { color: #F7DF1E; }
+        .fa-react { color: #61DAFB; }
+        .fa-laravel { color: #FF2D20; }
+        .fa-database { color: #fff; }
+        .fa-docker { color: #2496ED; }
+        .fa-aws { color: #FF9900; }
+        .fa-python { color: #3776AB; }
+
+        /* =========================================
+           STYLE 1: SPOTLIGHT GRID (Stripe Style)
+           ========================================= */
+        #style-1 .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            max-width: 800px;
+            width: 100%;
+        }
+        #style-1 .card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            cursor: default;
+            overflow: hidden;
+        }
+        #style-1 .card::before {
+            content: "";
+            position: absolute;
+            top: var(--y, -150px);
+            left: var(--x, -150px);
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(39, 201, 63, 0.15), transparent 70%);
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.5s;
+            pointer-events: none;
+        }
+        #style-1 .grid:hover .card::before { opacity: 1; }
+        #style-1 i { font-size: 2.5rem; margin-bottom: 15px; }
+        #style-1 h3 { font-size: 1rem; font-weight: 500; }
+
+        /* =========================================
+           STYLE 2: 3D FLIP CARDS
+           ========================================= */
+        #style-2 .grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 1000px; }
+        #style-2 .card-container {
+            width: 160px; height: 160px; perspective: 1000px; cursor: pointer;
+        }
+        #style-2 .card-inner {
+            position: relative; width: 100%; height: 100%; text-align: center;
+            transition: transform 0.6s; transform-style: preserve-3d;
+        }
+        #style-2 .card-container:hover .card-inner { transform: rotateY(180deg); }
+        #style-2 .front, #style-2 .back {
+            position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        #style-2 .front { background: #1a1a1a; border: 1px solid #333; }
+        #style-2 .back { background: #27c93f; color: #000; transform: rotateY(180deg); padding: 10px; }
+        #style-2 i { font-size: 3rem; margin-bottom: 10px; }
+        #style-2 .back span { font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; }
+        #style-2 .back small { font-size: 0.7rem; }
+
+        /* =========================================
+           STYLE 3: FLOATING ORBS
+           ========================================= */
+        #style-3 .orb-container { position: relative; width: 100%; height: 500px; overflow: hidden; }
+        #style-3 .orb {
+            position: absolute; border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.1);
+            display: flex; justify-content: center; align-items: center;
+            font-weight: bold; color: #ccc;
+            animation: float 6s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+        #style-3 .orb:hover { background: rgba(39, 201, 63, 0.2); border-color: #27c93f; z-index: 10; cursor: pointer; color: white; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+
+        /* =========================================
+           STYLE 4: INFINITE MARQUEE
+           ========================================= */
+        #style-4 .marquee-wrapper { width: 100%; overflow: hidden; background: #111; padding: 40px 0; transform: rotate(-2deg); border-top: 2px solid #27c93f; border-bottom: 2px solid #27c93f; }
+        #style-4 .marquee-track { display: flex; gap: 60px; animation: scroll 15s linear infinite; width: max-content; }
+        #style-4 .skill-item { font-size: 4rem; font-weight: 900; color: transparent; -webkit-text-stroke: 1px #555; text-transform: uppercase; transition: 0.3s; }
+        #style-4 .skill-item:hover { color: #27c93f; -webkit-text-stroke: 1px #27c93f; }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* =========================================
+           STYLE 5: NEON GLOW BARS
+           ========================================= */
+        #style-5 .bar-container { width: 100%; max-width: 600px; display: flex; flex-direction: column; gap: 20px; }
+        #style-5 .skill-row { display: flex; align-items: center; justify-content: space-between; position: relative; }
+        #style-5 .label { font-family: monospace; width: 80px; text-align: right; margin-right: 20px; color: #27c93f; }
+        #style-5 .progress-track { flex-grow: 1; height: 6px; background: #222; position: relative; border-radius: 3px; overflow: hidden; }
+        #style-5 .progress-fill { height: 100%; background: #27c93f; box-shadow: 0 0 10px #27c93f; width: 0; animation: fillBar 2s forwards; }
+        @keyframes fillBar { to { width: var(--w); } }
+
+        /* =========================================
+           STYLE 6: HEXAGON HIVE
+           ========================================= */
+        #style-6 .hex-grid { display: flex; flex-wrap: wrap; width: 90%; max-width: 800px; justify-content: center; }
+        #style-6 .hex {
+            width: 100px; height: 110px; background: #1a1a1a;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            margin: 5px; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: all 0.3s; border: 2px solid transparent;
+        }
+        #style-6 .hex:hover { background: #27c93f; transform: scale(1.1); color: black; }
+        #style-6 .hex i { font-size: 2rem; margin-bottom: 5px; }
+        #style-6 .hex span { font-size: 0.7rem; font-weight: bold; }
+
+        /* =========================================
+           STYLE 7: TERMINAL LIST
+           ========================================= */
+        #style-7 .terminal-box { width: 100%; max-width: 600px; background: #000; border: 1px solid #333; border-radius: 5px; padding: 20px; font-family: 'Courier New', monospace; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        #style-7 .top-bar { display: flex; gap: 5px; margin-bottom: 15px; }
+        #style-7 .circle { width: 10px; height: 10px; border-radius: 50%; background: #333; }
+        #style-7 .command { color: #fff; margin-bottom: 10px; }
+        #style-7 .output { color: #27c93f; line-height: 1.6; }
+        #style-7 .cursor { animation: blink 1s infinite; }
+
+        /* =========================================
+           STYLE 8: GLASSMORPHISM TILT
+           ========================================= */
+        #style-8 .tilt-grid { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; max-width: 900px; }
+        #style-8 .glass-card {
+            width: 140px; height: 140px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: 0.2s;
+        }
+        #style-8 .glass-card:hover { background: rgba(255,255,255,0.1); border-color: #27c93f; }
+        #style-8 i { font-size: 3rem; margin-bottom: 10px; background: -webkit-linear-gradient(#fff, #999); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* =========================================
+           STYLE 9: TAG CLOUD (Text Only)
+           ========================================= */
+        #style-9 .tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; max-width: 700px; }
+        #style-9 .tag {
+            padding: 10px 25px;
+            border: 1px solid #27c93f;
+            color: #27c93f;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        #style-9 .tag:hover { background: #27c93f; color: black; box-shadow: 0 0 20px #27c93f; }
+
+        /* =========================================
+           STYLE 10: ICON DOCK (MacOS Style)
+           ========================================= */
+        #style-10 .dock {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 20px;
+            display: flex;
+            gap: 20px;
+            backdrop-filter: blur(10px);
+            align-items: flex-end;
+            height: 100px;
+        }
+        #style-10 .dock-icon {
+            font-size: 2.5rem;
+            transition: 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            color: #ccc;
+        }
+        #style-10 .dock-icon:hover { transform: translateY(-20px) scale(1.5); color: white; margin: 0 10px; }
+
+    </style>
+</head>
+<body>
+
+    <nav class="demo-nav">
+        <a href="#style-1">1. Spotlight</a>
+        <a href="#style-2">2. 3D Flip</a>
+        <a href="#style-3">3. Floating</a>
+        <a href="#style-4">4. Marquee</a>
+        <a href="#style-5">5. Neon Bars</a>
+        <a href="#style-6">6. Hexagon</a>
+        <a href="#style-7">7. Terminal</a>
+        <a href="#style-8">8. Glass Tilt</a>
+        <a href="#style-9">9. Tag Cloud</a>
+        <a href="#style-10">10. Dock</a>
+    </nav>
+
+    <section id="style-1">
+        <h2 class="style-title">Style 01: <span>Spotlight Grid</span></h2>
+        <div class="grid" id="spotlight-grid">
+            <div class="card"><i class="fab fa-php"></i><h3>PHP</h3></div>
+            <div class="card"><i class="fas fa-database"></i><h3>SQL</h3></div>
+            <div class="card"><i class="fab fa-js"></i><h3>JavaScript</h3></div>
+            <div class="card"><i class="fab fa-react"></i><h3>React</h3></div>
+            <div class="card"><i class="fab fa-laravel"></i><h3>Laravel</h3></div>
+            <div class="card"><i class="fab fa-docker"></i><h3>Docker</h3></div>
+            <div class="card"><i class="fab fa-aws"></i><h3>AWS</h3></div>
+            <div class="card"><i class="fab fa-python"></i><h3>Python</h3></div>
+        </div>
+    </section>
+
+    <section id="style-2">
+        <h2 class="style-title">Style 02: <span>3D Context Cards</span></h2>
+        <div class="grid">
+            <div class="card-container">
+                <div class="card-inner">
+                    <div class="front"><i class="fab fa-php"></i></div>
+                    <div class="back"><span>PHP</span><small>5 Years Exp.<br>Used in 10 Projects</small></div>
+                </div>
+            </div>
+            <div class="card-container">
+                <div class="card-inner">
+                    <div class="front"><i class="fab fa-js"></i></div>
+                    <div class="back"><span>JS</span><small>Frontend Logic<br>GSAP Expert</small></div>
+                </div>
+            </div>
+            <div class="card-container">
+                <div class="card-inner">
+                    <div class="front"><i class="fas fa-database"></i></div>
+                    <div class="back"><span>SQL</span><small>Complex Queries<br>Optimization</small></div>
+                </div>
+            </div>
+            <div class="card-container">
+                <div class="card-inner">
+                    <div class="front"><i class="fab fa-react"></i></div>
+                    <div class="back"><span>React</span><small>Single Page Apps<br>Redux</small></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="style-3">
+        <h2 class="style-title">Style 03: <span>Floating Orbs</span></h2>
+        <div class="orb-container">
+            <div class="orb" style="width: 100px; height: 100px; top: 20%; left: 20%; animation-delay: 0s;">PHP</div>
+            <div class="orb" style="width: 80px; height: 80px; top: 50%; left: 50%; animation-delay: 1s;">JS</div>
+            <div class="orb" style="width: 120px; height: 120px; top: 10%; left: 60%; animation-delay: 2s;">SQL</div>
+            <div class="orb" style="width: 90px; height: 90px; top: 60%; left: 30%; animation-delay: 1.5s;">React</div>
+            <div class="orb" style="width: 70px; height: 70px; top: 30%; left: 80%; animation-delay: 0.5s;">Git</div>
+            <div class="orb" style="width: 110px; height: 110px; top: 70%; left: 70%; animation-delay: 2.5s;">AWS</div>
+        </div>
+    </section>
+
+    <section id="style-4">
+        <h2 class="style-title">Style 04: <span>Infinite Marquee</span></h2>
+        <div class="marquee-wrapper">
+            <div class="marquee-track">
+                <span class="skill-item">PHP</span>
+                <span class="skill-item">JavaScript</span>
+                <span class="skill-item">React</span>
+                <span class="skill-item">SQL</span>
+                <span class="skill-item">Docker</span>
+                <span class="skill-item">AWS</span>
+                <span class="skill-item">Figma</span>
+                <span class="skill-item">Python</span>
+                <span class="skill-item">PHP</span>
+                <span class="skill-item">JavaScript</span>
+                <span class="skill-item">React</span>
+                <span class="skill-item">SQL</span>
+                <span class="skill-item">Docker</span>
+                <span class="skill-item">AWS</span>
+                <span class="skill-item">Figma</span>
+                <span class="skill-item">Python</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="style-5">
+        <h2 class="style-title">Style 05: <span>Data Bars</span></h2>
+        <div class="bar-container">
+            <div class="skill-row"><span class="label">Backend</span><div class="progress-track"><div class="progress-fill" style="--w: 95%"></div></div></div>
+            <div class="skill-row"><span class="label">Frontend</span><div class="progress-track"><div class="progress-fill" style="--w: 85%"></div></div></div>
+            <div class="skill-row"><span class="label">Database</span><div class="progress-track"><div class="progress-fill" style="--w: 90%"></div></div></div>
+            <div class="skill-row"><span class="label">DevOps</span><div class="progress-track"><div class="progress-fill" style="--w: 60%"></div></div></div>
+        </div>
+    </section>
+
+    <section id="style-6">
+        <h2 class="style-title">Style 06: <span>Hive Grid</span></h2>
+        <div class="hex-grid">
+            <div class="hex"><i class="fab fa-php"></i><span>PHP</span></div>
+            <div class="hex"><i class="fab fa-js"></i><span>JS</span></div>
+            <div class="hex"><i class="fas fa-database"></i><span>SQL</span></div>
+            <div class="hex"><i class="fab fa-react"></i><span>React</span></div>
+            <div class="hex"><i class="fab fa-git-alt"></i><span>Git</span></div>
+            <div class="hex"><i class="fab fa-docker"></i><span>Docker</span></div>
+            <div class="hex"><i class="fab fa-linux"></i><span>Linux</span></div>
+        </div>
+    </section>
+
+    <section id="style-7">
+        <h2 class="style-title">Style 07: <span>Hacker Terminal</span></h2>
+        <div class="terminal-box">
+            <div class="top-bar"><div class="circle" style="background:#ff5f56"></div><div class="circle" style="background:#ffbd2e"></div><div class="circle" style="background:#27c93f"></div></div>
+            <div class="command">root@harshil:~$ list --skills</div>
+            <div class="output">
+                > PHP Frameworks (Laravel, CodeIgniter)<br>
+                > JavaScript (ES6+, React, GSAP)<br>
+                > Databases (MySQL, PostgreSQL)<br>
+                > Cloud (AWS EC2, S3)<br>
+                > Tools (Git, Docker, Postman)<br>
+                <span class="cursor">_</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="style-8">
+        <h2 class="style-title">Style 08: <span>Glass Tilt</span></h2>
+        <div class="tilt-grid">
+            <div class="glass-card" onmousemove="tilt(event, this)" onmouseleave="resetTilt(this)">
+                <i class="fab fa-php"></i>
+                <span>PHP</span>
+            </div>
+            <div class="glass-card" onmousemove="tilt(event, this)" onmouseleave="resetTilt(this)">
+                <i class="fab fa-js"></i>
+                <span>JS</span>
+            </div>
+            <div class="glass-card" onmousemove="tilt(event, this)" onmouseleave="resetTilt(this)">
+                <i class="fab fa-react"></i>
+                <span>React</span>
+            </div>
+            <div class="glass-card" onmousemove="tilt(event, this)" onmouseleave="resetTilt(this)">
+                <i class="fas fa-database"></i>
+                <span>SQL</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="style-9">
+        <h2 class="style-title">Style 09: <span>Outline Tags</span></h2>
+        <div class="tags">
+            <span class="tag">PHP</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">SQL</span>
+            <span class="tag">React.js</span>
+            <span class="tag">Tailwind CSS</span>
+            <span class="tag">GSAP</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">Git & GitHub</span>
+            <span class="tag">REST APIs</span>
+            <span class="tag">AWS</span>
+        </div>
+    </section>
+
+    <section id="style-10">
+        <h2 class="style-title">Style 10: <span>MacOS Dock</span></h2>
+        <div class="dock">
+            <i class="fab fa-html5 dock-icon"></i>
+            <i class="fab fa-css3-alt dock-icon"></i>
+            <i class="fab fa-js dock-icon"></i>
+            <i class="fab fa-php dock-icon"></i>
+            <i class="fab fa-react dock-icon"></i>
+            <i class="fab fa-github dock-icon"></i>
+        </div>
+    </section>
+
+    <script>
+        // JS FOR SPOTLIGHT (Style 1)
+        const grid = document.getElementById("spotlight-grid");
+        const cards = document.querySelectorAll("#style-1 .card");
+
+        grid.onmousemove = e => {
+            for(const card of cards) {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty("--x", `${x}px`);
+                card.style.setProperty("--y", `${y}px`);
+            }
+        };
+
+        // JS FOR TILT (Style 8)
+        function tilt(e, card) {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left; // x position within the element
+            const y = e.clientY - rect.top;  // y position within the element
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = ((y - centerY) / centerY) * -20;
+            const rotateY = ((x - centerX) / centerX) * 20;
+
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+        }
+
+        function resetTilt(card) {
+            card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale(1)`;
+        }
+    </script>
+</body>
+</html>
