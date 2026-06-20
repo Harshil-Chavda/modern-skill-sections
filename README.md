@@ -1,39 +1,47 @@
-# Modern Skill Sections 🛠️
+<div align="center">
 
-> **Designed & Curated by [Harshil Chavda](https://github.com/Harshil-Chavda)**
+# Modern Skill Sections
 
-A comprehensive collection of **10 Unique UI Patterns** specifically designed for the "Skills" or "Tech Stack" section of a portfolio. This repository offers a variety of styles from 3D interactive cards to minimalist glassmorphism.
+**Ten reusable visual patterns for presenting skills and technology stacks.**
 
-## 🎨 The Collection
-1.  **Spotlight Grid:** Mouse-tracking radial gradient reveal.
-2.  **3D Flip Cards:** Double-sided cards revealing details on hover.
-3.  **Floating Orbs:** Animated, drifting circles with backdrop blur.
-4.  **Infinite Marquee:** Angled, scrolling text banner.
-5.  **Neon Bars:** Glowing progress bars with animation.
-6.  **Hexagon Hive:** Honeycomb grid layout with clip-path.
-7.  **Hacker Terminal:** Command-line style list.
-8.  **Glass Tilt:** 3D tilt effect on glassmorphism cards.
-9.  **Tag Cloud:** Simple, clean pill-shaped tags.
-10. **MacOS Dock:** Magnifying icon dock interaction.
+[![HTML](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)](https://developer.mozilla.org/docs/Web/HTML)
+[![CSS](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)](https://developer.mozilla.org/docs/Web/CSS)
+[![JavaScript](https://img.shields.io/badge/Vanilla_JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=111827)](https://developer.mozilla.org/docs/Web/JavaScript)
 
-## 🛠 Tech Stack
-* **CSS3:** `clip-path`, `backdrop-filter`, `transform-style: preserve-3d`.
-* **JavaScript:** Used for Mouse Tracking (Spotlight/Tilt) and Dock magnification.
-* **FontAwesome:** For technology icons.
+[Explore the live collection](https://harshil-chavda.github.io/modern-skill-sections/skill-sections.html)
 
-## 🚀 Usage
-1.  Clone the repository:
-    ```bash
-    git clone [https://github.com/Harshil-Chavda/modern-skill-sections.git](https://github.com/Harshil-Chavda/modern-skill-sections.git)
-    ```
-2.  Open `skill-sections.html` to view the styles.
-3.  **Integration:** Copy the specific `#style-X` CSS and HTML block into your project.
+</div>
 
----
+## Included patterns
 
-## 🌐 Connect
-* **GitHub:** [Harshil-Chavda](https://github.com/Harshil-Chavda)
-* **LinkedIn:** [Harshil Chavda](https://www.linkedin.com/in/harshil-chavda-webdev/)
-* **Instagram:** [@harshil_chavda__](https://www.instagram.com/harshil_chavda__/)
+1. Spotlight grid with pointer-tracking gradients
+2. Three-dimensional flip cards
+3. Floating glassmorphism orbs
+4. Infinite angled marquee
+5. Animated neon progress bars
+6. Hexagonal technology grid
+7. Terminal-inspired skills list
+8. Glass cards with perspective tilt
+9. Minimal tag cloud
+10. Dock-style icon magnification
 
-*© 2025 Harshil Chavda. All Rights Reserved.*
+## Use the collection
+
+```bash
+git clone https://github.com/Harshil-Chavda/modern-skill-sections.git
+cd modern-skill-sections
+```
+
+Open `skill-sections.html` directly in a browser. Copy the relevant HTML, CSS, and JavaScript for the pattern you want, then adapt colors, spacing, content, and accessibility labels for your project.
+
+## Design considerations
+
+- Review motion preferences before using continuous animation.
+- Preserve keyboard access when adapting interactive patterns.
+- Check text contrast against custom backgrounds.
+- Test hover-focused effects on touch devices.
+
+## Author
+
+Designed and maintained by [Harshil Chavda](https://github.com/Harshil-Chavda).
+
